@@ -1,0 +1,247 @@
+:root{
+  --slide-ratio:9/16;
+  --slide-header-safe:calc(64px + env(safe-area-inset-top));
+  --slide-gutter:clamp(22px,5.4vw,52px);
+  --slide-title-top:12%;
+  --slide-body-top:42%;
+  --slide-footer-bottom:6%;
+}
+
+/*
+  Shared mobile slide system.
+  Every .panel is one 9:16 canvas. The named zone variables above are the
+  alignment contract for new live typography and artwork added later.
+*/
+@media(max-width:960px){
+  main{width:100%;max-width:960px;margin-inline:auto}
+
+  main>.panel{
+    --slide-surface:#fff;
+    position:relative!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:var(--art-ratio,var(--slide-ratio))!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:var(--slide-surface)!important;
+    container-type:inline-size;
+    scroll-margin-top:var(--slide-header-safe);
+  }
+
+  main>.panel[data-theme="dark"],
+  main>#case-study-introduction,
+  main>#work-with-us{
+    --slide-surface:#050505;
+  }
+
+  main>.panel>.slide-art,
+  main>.panel>.team-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:var(--slide-surface)!important;
+  }
+
+  /* Preserve each complete supplied composition inside the common canvas. */
+  main>.panel>.slide-art>img:first-child:not(.brand-word-image),
+  main>.panel>.team-art>img:first-child,
+  main>.panel>img:first-child{
+    position:absolute!important;
+    inset:0!important;
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+
+  /* The opening artwork includes interactive overlays tied to its full frame. */
+  #home>.slide-art>.hero-artwork,
+  #home>.slide-art>.hero-artwork>img{
+    position:absolute!important;
+    inset:0!important;
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:fill!important;
+  }
+
+  /* One consistent protected band behind the fixed navigation. */
+  main>.panel>.slide-art::after,
+  main>.panel>.team-art::after,
+  main>.panel>img:first-child::after{
+    content:"";
+    position:absolute;
+    z-index:4;
+    inset:0 0 auto;
+    height:6.3%!important;
+    pointer-events:none;
+    background:var(--slide-surface)!important;
+  }
+
+  /* Remove page-specific offsets that previously changed slide height. */
+  .work-with-us-page main{padding-top:0!important}
+  #metrics>.slide-art{padding-top:0!important}
+  #metrics>.slide-art::after{top:0!important}
+  #work-with-us-goal>.slide-art>img:first-child{
+    inset:0!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:fill!important;
+  }
+
+  /* Reusable live-content zones for all future slides. */
+  .slide-title-zone{
+    position:absolute;
+    z-index:2;
+    top:var(--slide-title-top);
+    left:var(--slide-gutter);
+    right:var(--slide-gutter);
+  }
+  .slide-body-zone{
+    position:absolute;
+    z-index:2;
+    top:var(--slide-body-top);
+    left:var(--slide-gutter);
+    right:var(--slide-gutter);
+  }
+  .slide-footer-zone{
+    position:absolute;
+    z-index:2;
+    left:var(--slide-gutter);
+    right:var(--slide-gutter);
+    bottom:var(--slide-footer-bottom);
+  }
+}
+
+/* Full-width artwork uses its own proportions: no letterboxing, stretching,
+   or reduced text size on narrow screens. */
+@media(max-width:960px){
+ main>.panel>.slide-art>img:first-child:not(.brand-word-image),
+ main>.panel>.team-art>img:first-child{object-fit:contain!important;object-position:top center!important;transform:none!important;opacity:1!important;transition:none!important}
+ #home>.slide-art>.hero-artwork>img{object-fit:contain!important}
+ #team>.team-art>img{margin-top:0!important}
+ #system>.slide-art::before,#system .system-title{display:none!important}
+ #work-with-us-goal>.slide-art::after{display:none!important}
+ #customer-acquisition .case-slide-header{display:none!important}
+ #customer-acquisition .acquisition-crop{flex:1;position:relative}
+ #customer-acquisition .acquisition-crop img{object-fit:contain!important}
+}
+
+/* The acquisition artwork has no baked-in header. Keep the whole image in
+   normal flow and reserve navigation space above it instead of masking it. */
+@media(max-width:960px){
+ main>#customer-acquisition{aspect-ratio:auto!important;overflow:visible!important}
+ main>#customer-acquisition>.slide-art{
+  position:relative!important;inset:auto!important;display:block!important;
+  height:auto!important;aspect-ratio:auto!important;
+  padding-top:var(--slide-header-safe)!important;overflow:visible!important;
+ }
+ main>#customer-acquisition>.slide-art::after{display:none!important}
+ main>#customer-acquisition>.slide-art>img:first-child{
+  position:relative!important;inset:auto!important;
+  width:100%!important;height:auto!important;object-fit:contain!important;
+ }
+}
+
+/* Work With Us uploads contain no embedded navigation. Let both complete
+   compositions determine their height, with a separate safe header band. */
+@media(max-width:960px){
+ .work-with-us-page main>.panel{aspect-ratio:auto!important;overflow:visible!important}
+ .work-with-us-page main>.panel>.slide-art{
+  position:relative!important;inset:auto!important;display:block!important;
+  height:auto!important;aspect-ratio:auto!important;
+  padding-top:var(--slide-header-safe)!important;overflow:visible!important;
+ }
+ .work-with-us-page main>.panel>.slide-art::after{display:none!important}
+ .work-with-us-page main>.panel>.slide-art>img:first-child{
+  position:relative!important;inset:auto!important;display:block!important;
+  width:100%!important;height:auto!important;margin:0!important;
+  object-fit:contain!important;transform:none!important;
+ }
+}
+
+@media(max-width:960px){
+ main>#conclusion[data-theme="dark"],main>#conclusion[data-theme="dark"]>.slide-art{background:#050505!important}
+ main>#conclusion[data-theme="dark"]>.slide-art>img{filter:none!important}
+ main>#conclusion[data-theme="dark"]>.slide-art::after{background:#050505!important}
+}
+
+/* End the slide just below its result statement, excluding the old footer. */
+@media(max-width:960px){
+ main>#conclusion{aspect-ratio:2048/2550!important}
+ main>#conclusion>.slide-art>img{
+  height:auto!important;width:100%!important;
+  clip-path:inset(0 0 17% 0);
+ }
+}
+
+/* Hero-only correction: width sets the original artwork's height. */
+@media(max-width:960px){
+ main>#home{aspect-ratio:1418/3072!important;height:auto!important;min-height:0!important}
+ #home>.slide-art>.hero-artwork{height:auto!important;aspect-ratio:1418/3072!important}
+ #home>.slide-art>.hero-artwork>img{
+  width:100%!important;height:auto!important;aspect-ratio:1418/3072!important;
+  object-fit:contain!important;object-position:top center!important;
+ }
+ #home>.slide-art::after{height:15%!important;background:#fff!important}
+}
+
+/* Remove only the hero's empty upper band. All artwork and hit areas stay
+   in the same full-size frame, so their proportions and alignment are intact. */
+@media(max-width:960px){
+ main>#home{
+  --hero-top-trim:min(0px,calc(88px + env(safe-area-inset-top) - 41.3vw));
+  aspect-ratio:auto!important;
+  height:calc(216.643159vw + var(--hero-top-trim))!important;
+ }
+ #home>.slide-art{
+  inset:var(--hero-top-trim) 0 auto!important;
+  height:216.643159vw!important;
+ }
+}
+
+/* Join the first two slides at the marquee edge, with a small title gutter. */
+@media(max-width:960px){
+ main>#home{height:calc(206.677574vw + var(--hero-top-trim))!important}
+ main>#system{
+  --system-top-trim:min(0px,calc(24px - 17.650463vw));
+  aspect-ratio:auto!important;height:calc(177.777778vw + var(--system-top-trim))!important;
+ }
+ #system>.slide-art{
+  inset:var(--system-top-trim) 0 auto!important;
+  height:177.777778vw!important;
+ }
+}
+
+/* Remove the first upload's empty footer and the second upload's blank top.
+   Only the opening slide needs extra space for the fixed navigation. */
+@media(max-width:960px){
+ .work-with-us-page main>#work-with-us-goal>.slide-art{
+  height:calc(157.746479vw + var(--slide-header-safe))!important;
+  overflow:hidden!important;
+ }
+ .work-with-us-page main>#work-with-us>.slide-art{
+  padding-top:0!important;overflow:hidden!important;
+ }
+ .work-with-us-page main>#work-with-us>.slide-art>img:first-child{
+  margin-top:-9.248555vw!important;
+ }
+}
+
+/* Tighten this homepage join by cropping only the two empty image margins. */
+@media(max-width:960px){
+ .home-page main>#model{aspect-ratio:1728/2980!important}
+ .home-page #model>.slide-art{height:177.777778vw!important;inset:0 0 auto!important}
+ .home-page main>#case-study-preview{aspect-ratio:941/1492!important}
+ .home-page #case-study-preview>.slide-art{
+  inset:-19.128587vw 0 auto!important;height:177.683316vw!important;
+ }
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>cre-ation — Desktop website</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e2e8ef}
+    iframe{display:block;border:0;transform-origin:top left}
+  </style>
+</head>
+<body>
+  <iframe id="desktop-view" title="cre-ation desktop website"></iframe>
+  <script>
+    const frame=document.getElementById('desktop-view');
+    function fitDesktop(){
+      const width=document.documentElement.clientWidth;
+      const canvasWidth=Math.max(1440,width);
+      const scale=width/canvasWidth;
+      frame.style.width=canvasWidth+'px';
+      frame.style.height=(window.innerHeight/scale)+'px';
+      frame.style.transform='scale('+scale+')';
+    }
+    fitDesktop();
+    window.addEventListener('resize',fitDesktop);
+    frame.src='/cre-ation-mobile/?v=221';
+  </script>
+  <noscript><a href="/cre-ation-mobile/">Open cre-ation</a></noscript>
+</body>
+</html>

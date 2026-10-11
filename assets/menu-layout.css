@@ -1,0 +1,7 @@
+/* Shared menu hierarchy across every page. */
+.overlay .nav{display:grid;grid-template-rows:1fr auto;align-items:stretch;justify-content:stretch;gap:32px;min-height:0;padding:24px 0 0}
+.overlay .nav-primary{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px;padding-block:24px}
+.overlay .nav a{font-size:clamp(30px,9vw,86px);line-height:1.05;letter-spacing:-.045em;max-width:100%;overflow-wrap:normal}
+.overlay .nav .nav-contact{display:block;border-top:1px solid rgba(255,255,255,.35);padding-top:24px;font-size:clamp(24px,7vw,46px);line-height:1.15;letter-spacing:-.025em}
+.overlay .nav a:focus-visible{outline:2px solid currentColor;outline-offset:6px}
+@media(max-height:600px){.overlay .nav{gap:20px}.overlay .nav-primary{justify-content:flex-start;gap:12px;padding-block:12px}.overlay .nav a{font-size:clamp(28px,7vw,42px)}.overlay .nav .nav-contact{padding-top:18px}}

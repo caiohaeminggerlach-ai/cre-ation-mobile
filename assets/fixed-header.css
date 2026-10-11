@@ -1,0 +1,31 @@
+:root{--header-ink:#050505}
+.site-header{position:fixed;z-index:40;top:0;left:50%;transform:translateX(-50%);width:min(100%,960px);height:calc(64px + env(safe-area-inset-top));padding:env(safe-area-inset-top) clamp(22px,5.4vw,52px) 0;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;color:var(--header-ink);line-height:1;transition:background .18s,color .18s}
+.site-header.on-dark{background:#050505;color:#fff}
+.site-header .brand{display:inline-flex;align-items:center;width:clamp(142px,43vw,205px);flex:none;line-height:0;text-decoration:none}
+.site-header .brand img{display:block;width:100%;height:auto;max-height:38px;object-fit:contain;object-position:left center}
+.site-header.on-dark .brand img{filter:invert(1)}
+.site-header .menu-hit{position:static;z-index:auto;display:block;width:auto;height:auto;min-height:48px;padding:12px 0 12px 12px;border:0;background:transparent;color:inherit;cursor:pointer;font:400 clamp(14px,2.1vw,19px)/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap}
+.site-header .menu-hit:focus-visible,.site-header .brand:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.panel .slide-art .menu-hit{display:none!important}
+.panel>.slide-art::after{content:"";position:absolute;z-index:4;left:0;right:0;top:0;height:clamp(50px,6.9vw,70px);background:#fff;pointer-events:none}
+#not-marketing>.slide-art::after,#metrics>.slide-art::after{background:#050505}
+#execution>.slide-art::after{height:clamp(46px,6vw,68px)}
+.overlay.open{z-index:60}
+@media(min-width:961px){.site-header{top:24px}}
+@media(prefers-reduced-motion:reduce){.site-header{transition:none}}
+.contact-page main>header{display:none}
+.contact-page main{padding-top:calc(64px + env(safe-area-inset-top) + 24px)}
+.contact-page .overlay{position:fixed;z-index:60;inset:0;display:grid;grid-template-rows:auto 1fr;padding:max(28px,env(safe-area-inset-top)) 6vw max(28px,env(safe-area-inset-bottom));background:#050505;color:#fff;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.contact-page .overlay.open{opacity:1;visibility:visible}
+.contact-page .overlay-top{display:flex;align-items:center;justify-content:space-between;font-size:clamp(20px,5vw,38px);font-weight:700}
+.contact-page .close{border:0;background:transparent;color:#fff;padding:12px;font:400 clamp(16px,4vw,26px)/1 ui-monospace,SFMono-Regular,Menlo,monospace;cursor:pointer}
+.contact-page .nav{display:flex;flex-direction:column;justify-content:center;gap:1.2vh}
+.contact-page .nav a{color:#fff;text-decoration:none;text-transform:uppercase;font:900 clamp(38px,11vw,94px)/.84 Impact,'Arial Narrow',Arial,sans-serif;letter-spacing:-.045em}
+/* Slide five starts its headline close to the embedded header; clear space for the live header without covering the headline. */
+#metrics>.slide-art{padding-top:64px;background:#050505}
+#metrics>.slide-art::after{top:64px;height:min(7.2vw,70px);background:#050505}
+/* Keep the menu usable with short screens, safe areas and enlarged text. */
+.overlay{height:100dvh;overflow-y:auto;overscroll-behavior:contain}
+.overlay .nav{min-height:0;padding-block:24px;gap:12px}
+.overlay .nav a{line-height:1}
+@media(max-height:600px){.overlay .nav{justify-content:flex-start}.overlay .nav a{font-size:clamp(28px,8vw,42px)}}

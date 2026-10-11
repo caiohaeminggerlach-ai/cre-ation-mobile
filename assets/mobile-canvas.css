@@ -1,0 +1,72 @@
+/* Mobile canvas contract. Artwork remains in normal flow at its native ratio.
+   Raster typography is part of the approved artwork, not viewport-sized text.
+   Deliberately scoped to mobile so desktop keeps its existing cascade. */
+@media (max-width:960px) {
+  :root {
+    --mobile-gutter:clamp(22px,5.4vw,52px);
+    --mobile-header-safe:calc(64px + env(safe-area-inset-top));
+    --mobile-bottom-safe:env(safe-area-inset-bottom,0px);
+  }
+  body main {width:100%;max-width:960px;margin-inline:auto;}
+  body.work-with-us-page main {padding-top:0!important;}
+  /* Content sets height: no viewport or portrait-frame floor to add blank
+     bands above/below shorter compositions. Tall artwork can still grow. */
+  body main>section.panel:is(#home,#system,#not-marketing,#what-we-do,#metrics,#model,#case-study-preview,#ai,#conclusion,#case-study-introduction,#execution,#brand-ambassadors,#talk-to-customers,#remove-products,#website-ux,#the-grey-routine,#customer-acquisition,#team,#work-with-us-goal,#work-with-us) {
+    box-sizing:border-box;position:relative!important;
+    display:flex;flex-direction:column;justify-content:flex-start;
+    width:100%!important;height:auto!important;
+    min-height:0!important;
+    max-height:none!important;aspect-ratio:auto!important;
+    padding:0!important;margin:0!important;
+    overflow:clip!important;scroll-margin-top:var(--mobile-header-safe);
+  }
+  body main>section.panel:is(#home,#system,#not-marketing,#what-we-do,#metrics,#model,#case-study-preview,#ai,#conclusion,#case-study-introduction,#execution,#brand-ambassadors,#talk-to-customers,#remove-products,#website-ux,#the-grey-routine,#customer-acquisition,#team,#work-with-us-goal,#work-with-us)>.slide-art,
+  body main>section.panel:is(#home,#system,#not-marketing,#what-we-do,#metrics,#model,#case-study-preview,#ai,#conclusion,#case-study-introduction,#execution,#brand-ambassadors,#talk-to-customers,#remove-products,#website-ux,#the-grey-routine,#customer-acquisition,#team,#work-with-us-goal,#work-with-us)>.team-art {
+    box-sizing:border-box;position:relative!important;
+    display:block!important;inset:auto!important;flex:0 0 auto;
+    width:100%!important;height:auto!important;min-height:0!important;
+    max-height:none!important;aspect-ratio:auto!important;
+    margin:0!important;padding:0!important;overflow:visible!important;
+  }
+  body main>section.panel:is(#home,#system,#not-marketing,#what-we-do,#metrics,#model,#case-study-preview,#ai,#conclusion,#case-study-introduction,#execution,#brand-ambassadors,#talk-to-customers,#remove-products,#website-ux,#the-grey-routine,#customer-acquisition,#team,#work-with-us-goal,#work-with-us)>.slide-art>img:first-child:not(.brand-word-image),
+  body main>section.panel:is(#home,#system,#not-marketing,#what-we-do,#metrics,#model,#case-study-preview,#ai,#conclusion,#case-study-introduction,#execution,#brand-ambassadors,#talk-to-customers,#remove-products,#website-ux,#the-grey-routine,#customer-acquisition,#team,#work-with-us-goal,#work-with-us)>.team-art>img:first-child {
+    position:relative!important;inset:auto!important;display:block!important;
+    width:100%!important;height:auto!important;min-height:0!important;
+    max-width:100%!important;max-height:none!important;margin:0!important;
+    object-fit:contain!important;object-position:top center!important;
+  }
+  /* Hero interactions stay anchored to the same full proportional art frame. */
+  body main>section#home.panel>.slide-art>.hero-artwork {
+    position:relative!important;inset:auto!important;display:block!important;
+    width:100%!important;height:auto!important;aspect-ratio:auto!important;
+  }
+  body main>section#home.panel>.slide-art>.hero-artwork>img {
+    position:relative!important;inset:auto!important;display:block!important;
+    width:100%!important;height:auto!important;aspect-ratio:auto!important;
+    object-fit:contain!important;
+  }
+  /* No extra header spacer on every section. Only header-free first artwork
+     reserves room for the movable navigation. */
+  body.work-with-us-page main>section#work-with-us-goal.panel>.slide-art,
+  body main>section#customer-acquisition.panel:first-child>.slide-art {
+    padding-top:var(--mobile-header-safe)!important;
+  }
+  body main>section#customer-acquisition.panel:not(:first-child)>.slide-art {
+    padding-top:0!important;
+  }
+  body main>section#customer-acquisition.panel>.slide-art::after,
+  body.work-with-us-page main>section.panel>.slide-art::after {
+    display:none!important;
+  }
+  /* Restore the complete approved four-stage composition, including its
+     bottom wordmark. The intrinsic image controls height without footer crops. */
+  body.home-page main>section#conclusion.panel {height:auto!important;aspect-ratio:auto!important;}
+  body.home-page main>section#conclusion.panel>.slide-art {height:auto!important;aspect-ratio:auto!important;}
+  body.home-page main>section#conclusion.panel>.slide-art>img:first-child {clip-path:none!important;}
+  body main>.contact-band {padding-inline:var(--mobile-gutter);}
+  body main>.contact-band a {flex-wrap:wrap;}
+  body.contact-page main {
+    min-height:100svh;padding-inline:var(--mobile-gutter);
+    padding-bottom:max(24px,var(--mobile-bottom-safe));
+  }
+}

@@ -1,0 +1,7 @@
+.site-loader{position:fixed;z-index:1000;inset:0;height:100dvh;display:grid;place-items:center;overflow:hidden;background:#000;touch-action:none;transition:opacity .42s cubic-bezier(.03,.71,.31,1)}
+.intro-seen .site-loader{display:none}
+.site-loader.is-exiting{opacity:0;pointer-events:none}
+.loader-stage{width:min(94vw,760px);overflow:hidden}
+.loader-fluid{display:block;width:100%;height:auto}
+.loader-static{display:none;width:min(76vw,487px);height:auto;margin:auto;filter:invert(1)}
+@media(prefers-reduced-motion:reduce){.loader-fluid{display:none}.loader-static{display:block}}
